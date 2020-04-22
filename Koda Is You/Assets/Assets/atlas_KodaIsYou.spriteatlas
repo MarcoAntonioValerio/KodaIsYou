@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: atlas_KodaIsYou
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 512
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+    - {fileID: 2800000, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+    - {fileID: 21300000, guid: 56783b288e16a234fb44fc85cc0e1186, type: 3}
+    totalSpriteSurfaceArea: 229376
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 6559781591783746905, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: -8261071444045388773, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 6971643678137411310, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 6218165065401676947, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 7206410432398515323, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 7745249281636092269, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 1908964476763170073, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: -258908848933394230, guid: a23a753bb36b2c444adf3467b762e617, type: 3}
+  - {fileID: 6580653497286155646, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 5426001958665775630, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -3089784752312184508, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -8319974124475028282, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 3570815459078113061, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -7965541064674875293, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -1401336724999321131, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -8430914526730284691, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 6984486229468200274, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 9010410842342643981, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -4631002611277286180, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -5244368449424547931, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 5261624605351688739, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 1473865148126891055, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -8099728917934470891, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 3107964124524521212, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -5772114402576160308, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 6855888234765444848, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 1192673178863937782, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 7944889042921939437, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 6496003949384930466, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -4724927586471519092, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 3833068803442395252, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 4244702460323378164, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 4595133852065056538, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 3045993332788472480, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -5804444298611260382, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -1502417691220154687, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 8227660283837487721, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 2365361380423577679, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 7669749345354089363, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: -8919148012604873888, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 8417226815455090520, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 4494142820190879268, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 8981502411983377444, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 4436121569898128551, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  - {fileID: 7422594169354078840, guid: d6ee32cc685f3694eb7682790ff18ba7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - sheet_KodaAnimation_3
+  - sheet_KodaAnimation_2
+  - sheet_KodaAnimation_1
+  - sheet_KodaAnimation_0
+  - sheet_KodaAnimation_7
+  - sheet_KodaAnimation_6
+  - sheet_KodaAnimation_5
+  - sheet_KodaAnimation_4
+  - sheet_WordsAndObjects_19
+  - sheet_WordsAndObjects_18
+  - sheet_WordsAndObjects_11
+  - sheet_WordsAndObjects_10
+  - sheet_WordsAndObjects_13
+  - sheet_WordsAndObjects_12
+  - sheet_WordsAndObjects_15
+  - sheet_WordsAndObjects_14
+  - sheet_WordsAndObjects_17
+  - sheet_WordsAndObjects_16
+  - sheet_WordsAndObjects_20
+  - sheet_WordsAndObjects_21
+  - sheet_WordsAndObjects_22
+  - sheet_WordsAndObjects_23
+  - sheet_WordsAndObjects_33
+  - sheet_WordsAndObjects_24
+  - sheet_WordsAndObjects_32
+  - sheet_WordsAndObjects_25
+  - sheet_WordsAndObjects_31
+  - sheet_WordsAndObjects_26
+  - sheet_WordsAndObjects_30
+  - sheet_WordsAndObjects_27
+  - sheet_WordsAndObjects_28
+  - sheet_WordsAndObjects_36
+  - sheet_WordsAndObjects_29
+  - sheet_WordsAndObjects_35
+  - sheet_WordsAndObjects_34
+  - sheet_WordsAndObjects_2
+  - sheet_WordsAndObjects_3
+  - sheet_WordsAndObjects_0
+  - sheet_WordsAndObjects_1
+  - sheet_WordsAndObjects_6
+  - sheet_WordsAndObjects_7
+  - sheet_WordsAndObjects_4
+  - sheet_WordsAndObjects_5
+  - sheet_WordsAndObjects_8
+  - sheet_WordsAndObjects_9
+  m_Tag: atlas_KodaIsYou
+  m_IsVariant: 0
