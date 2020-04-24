@@ -15,6 +15,10 @@ public class scp_KodaAnimationTransition : MonoBehaviour
     {
         animator.SetInteger("DirectionController",1);
     }
+    public void KodaLeft()
+    {        
+        animator.SetInteger("DirectionController", 1); 
+    }
     public void KodaIdle()
     {
         animator.SetInteger("DirectionController", 0);

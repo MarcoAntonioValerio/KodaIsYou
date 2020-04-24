@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class scp_GridMovement : MonoBehaviour
 {
+    /// <summary>
+    /// ToDo
+    ///*Sort out flipping!
+    /// </summary>
+
+
+
+
     [Header("moving Values")]
     public float moveSpeed = 5f;
     public Transform movePoint;
@@ -32,27 +40,38 @@ public class scp_GridMovement : MonoBehaviour
 
     public void Moving()
     {
-        
+        bool facingRight = true;
+
         whoIsMovingNow.transform.position = Vector3.MoveTowards(whoIsMovingNow.transform.position, movePoint.position,
                                                             moveSpeed * Time.deltaTime);
 
         if (Vector3.Distance(whoIsMovingNow.transform.position, movePoint.position) == 0f)
         {
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            
+            if (Input.GetAxisRaw("Horizontal") == 1f || Input.GetAxisRaw("Horizontal") == -1f)
             {
                 isMoving = true;
                 movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
 
-                if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == 1)
+                if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == 1f)
                 {
                     kodaAnimationScript.KodaRight();
-                    Debug.Log("Firing");
+                    facingRight = true;
+                    
                 }
-                if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == -1)
+                if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == -1f)
                 {
-                    //ToSetUp
-                    //kodaAnimationScript.KodaLeft();
-                }
+                    
+                    if (!facingRight)
+                    {
+                        FlipSprite();
+                        facingRight = false;
+                    }
+                    
+                    kodaAnimationScript.KodaLeft();
+
+                    
+                }                
                 isMoving = false;
             }
             else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
@@ -78,8 +97,16 @@ public class scp_GridMovement : MonoBehaviour
                         kodaAnimationScript.KodaIdle();
                     }
                     
+
                 }
             }
         }
+    }
+
+    public void FlipSprite()
+    {
+        var objectLocalScale = gameObject.transform.localScale; 
+        objectLocalScale.x *= -1;        
+        transform.localScale = objectLocalScale;
     }
 }
