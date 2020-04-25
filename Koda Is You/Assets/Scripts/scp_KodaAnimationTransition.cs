@@ -11,23 +11,23 @@ public class scp_KodaAnimationTransition : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void KodaRight()
+    public void KodaAnimationRight()
     {
         animator.SetInteger("DirectionController",1);
     }
-    public void KodaLeft()
+    public void KodaAnimationLeft()
     {        
-        animator.SetInteger("DirectionController", 1); 
+        animator.SetInteger("DirectionController", 1);     
     }
-    public void KodaIdle()
+    public void KodaAnimationIdle()
     {
         animator.SetInteger("DirectionController", 0);
     }
-    public void KodaUp()
+    public void KodaAnimationUp()
     {
         animator.SetInteger("DirectionController", 2);
     }
-    public void KodaDown()
+    public void KodaAnimatinionDown()
     {
         animator.SetInteger("DirectionController", 3);
     }
