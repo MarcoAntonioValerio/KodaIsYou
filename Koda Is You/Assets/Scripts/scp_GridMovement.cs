@@ -21,6 +21,7 @@ public class scp_GridMovement : MonoBehaviour
     private scp_KodaAnimationTransition kodaAnimationScript;
     private bool isMoving = false;
     private bool isFacingRight = true;
+    private Vector2 movement;
 
 
     //-------------------------------------------
@@ -32,18 +33,20 @@ public class scp_GridMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+    }
+    
+    private void FixedUpdate()
+    {
         var horizontal = Input.GetAxisRaw("Horizontal");
         if (isMoving == false)
         {
-            Moving();
+            Moving2(movement);
         }
-        
-        
         FlipSprite(horizontal);
     }
     //----------------------------------------------------------
-
-
 
     private void SetupStuff()
     {
@@ -59,6 +62,10 @@ public class scp_GridMovement : MonoBehaviour
         {
             whoIsMovingNow.transform.position = Vector3.MoveTowards(whoIsMovingNow.transform.position, movePoint.position,
                                                             moveSpeed * Time.deltaTime);
+
+            //Vector2 pos = movePoint.position;
+
+            //whoIsMovingNow.transform.position = this.GetComponent<Rigidbody2D>().MovePosition(pos);
 
             if (Vector3.Distance(whoIsMovingNow.transform.position, movePoint.position) == 0f)
             {
@@ -113,6 +120,11 @@ public class scp_GridMovement : MonoBehaviour
         
 
         
+    }
+
+    private void Moving2(Vector2 direction)
+    {
+        GetComponent<Rigidbody2D>().MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
 
     private void FlipSprite(float horizontal)
