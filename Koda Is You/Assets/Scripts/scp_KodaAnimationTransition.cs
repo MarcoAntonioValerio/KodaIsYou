@@ -5,10 +5,12 @@ using UnityEngine;
 public class scp_KodaAnimationTransition : MonoBehaviour
 {
     private Animator animator;
+    private bool isFacingRight = true;
     
     void Start()
     {
         animator = GetComponent<Animator>();
+        isFacingRight = true;
     }
 
     public void KodaAnimationRight()
@@ -31,5 +33,17 @@ public class scp_KodaAnimationTransition : MonoBehaviour
     {
         animator.SetInteger("DirectionController", 3);
     }
-        
+
+    public void FlipSprite(float horizontal)
+    {
+        if (horizontal > 0 && !isFacingRight || horizontal < 0 && isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+    }
+
 }
