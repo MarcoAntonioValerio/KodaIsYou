@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,13 +18,15 @@ public class scp_GridMovement : MonoBehaviour
     public Transform movePoint;
     [Header("Collision Stuff")]
     public LayerMask whatStopsMovement;
+    public LayerMask thingICanMove;
     public float raycastCircleSize = 0.2f;
 
 
     private GameObject whoIsMovingNow;
     private scp_KodaAnimationTransition kodaAnimationScript;
     private bool isMoving = false;
-    private bool isFacingRight = true;
+    private GameObject[] chainedObjects;
+    
     
 
 
@@ -38,16 +41,14 @@ public class scp_GridMovement : MonoBehaviour
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
         Moving();        
-        FlipSprite(horizontal);
+        kodaAnimationScript.FlipSprite(horizontal);
     }
     
     
     //----------------------------------------------------------
 
     private void VariablesInitialisation()
-    {
-        //
-        isFacingRight = true;
+    {               
         movePoint.parent = null;
         whoIsMovingNow = gameObject;
         kodaAnimationScript = FindObjectOfType<scp_KodaAnimationTransition>();
@@ -68,43 +69,26 @@ public class scp_GridMovement : MonoBehaviour
                 //Horizontal Movement
                 if (Mathf.Abs( Input.GetAxisRaw("Horizontal")) == 1f)
                 {
-                        //Raycast to check if the next position is occupied by a collider.
+                        //Collision check
                     if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, whatStopsMovement))
                     {
                         //Updating the position of the movePoint
                         movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                        
-                        //Animations
-                        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == 1f)
-                        {
-                            kodaAnimationScript.KodaAnimationRight();
 
-                        }
-                        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == -1f)
-                        {                            
-                            kodaAnimationScript.KodaAnimationLeft();
-
-                        }
+                        HorizontalPush();
+                        HorizontalAnimations();
                     }
                 }
                 //Vertical movement
                 else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
                 {
-                        //Raycast to check if the next position is occupied by a collider.
+                    //Collision check
                     if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), raycastCircleSize, whatStopsMovement))
                     {
                         //Updating the position of the movePoint
                         movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-                        
-                        //Animations
-                        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Vertical") == 1)
-                        {
-                            kodaAnimationScript.KodaAnimationUp();
-                        }
-                        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Vertical") == -1)
-                        {
-                            kodaAnimationScript.KodaAnimatinionDown();
-                        }
+
+                        VerticalAnimations();
                     }
                         
                 }
@@ -124,17 +108,50 @@ public class scp_GridMovement : MonoBehaviour
         
     }
 
-    
-
-    private void FlipSprite(float horizontal)
+    private void VerticalAnimations()
     {
-        if (horizontal > 0 && !isFacingRight || horizontal < 0 && isFacingRight)
+        //Animations
+        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Vertical") == 1)
         {
-            isFacingRight = !isFacingRight;
+            kodaAnimationScript.KodaAnimationUp();
+        }
+        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Vertical") == -1)
+        {
+            kodaAnimationScript.KodaAnimatinionDown();
+        }
+    }
 
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+    private void HorizontalAnimations()
+    {
+        //Animations
+        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == 1f)
+        {
+            kodaAnimationScript.KodaAnimationRight();
+
+        }
+        if (whoIsMovingNow.tag == "Player" && Input.GetAxisRaw("Horizontal") == -1f)
+        {
+            kodaAnimationScript.KodaAnimationLeft();
+
+        }
+    }
+
+    private void HorizontalPush()
+    {
+        ///SORT THIS SCRIPT TO ALLOW CHAINED PUSH
+
+
+
+        //Will push if the next moving place contains a gameObject wirh a thingsICanMove layerMask.
+        if (Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove))
+        {       
+            chainedObjects[0] = Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove).gameObject;
+            int arrayPos = 0;
+            while (Physics2D.OverlapCircle(chainedObjects[arrayPos].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove))
+            {
+                chainedObjects[arrayPos] = Physics2D.OverlapCircle(chainedObjects[arrayPos].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove).gameObject;
+                chainedObjects[arrayPos].transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+            } 
         }
     }
 }
