@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class scp_GridMovement : MonoBehaviour
@@ -19,15 +20,21 @@ public class scp_GridMovement : MonoBehaviour
     [Header("Collision Stuff")]
     public LayerMask whatStopsMovement;
     public LayerMask thingICanMove;
-    public float raycastCircleSize = 0.2f;
+    public float stopRaycastCircleSize = 0.2f;
+    public float pushRaycastCircleSize = 0.5f;
 
+    public Transform pushTarget;
+    
+
+    [SerializeField] List<GameObject> objectsToPushList;
+    [SerializeField] int numbertOfPushableObjects;
 
     private GameObject whoIsMovingNow;
-    private scp_KodaAnimationTransition kodaAnimationScript;
-    private bool isMoving = false;
-    private GameObject[] chainedObjects;
     
+    private scp_KodaAnimationTransition kodaAnimationScript;    
     
+
+
 
 
     //-------------------------------------------
@@ -48,7 +55,8 @@ public class scp_GridMovement : MonoBehaviour
     //----------------------------------------------------------
 
     private void VariablesInitialisation()
-    {               
+    {
+        numbertOfPushableObjects = GameObject.FindGameObjectsWithTag("Pushable").Count();
         movePoint.parent = null;
         whoIsMovingNow = gameObject;
         kodaAnimationScript = FindObjectOfType<scp_KodaAnimationTransition>();
@@ -70,7 +78,7 @@ public class scp_GridMovement : MonoBehaviour
                 if (Mathf.Abs( Input.GetAxisRaw("Horizontal")) == 1f)
                 {
                         //Collision check
-                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, whatStopsMovement))
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), stopRaycastCircleSize, whatStopsMovement))
                     {
                         //Updating the position of the movePoint
                         movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
@@ -83,7 +91,7 @@ public class scp_GridMovement : MonoBehaviour
                 else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
                 {
                     //Collision check
-                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), raycastCircleSize, whatStopsMovement))
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), stopRaycastCircleSize, whatStopsMovement))
                     {
                         //Updating the position of the movePoint
                         movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
@@ -97,6 +105,7 @@ public class scp_GridMovement : MonoBehaviour
                 else if ((Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0) && whoIsMovingNow.tag == "Player")
                 {
                     kodaAnimationScript.KodaAnimationIdle();
+                    
                 }
 
 
@@ -137,21 +146,57 @@ public class scp_GridMovement : MonoBehaviour
     }
 
     private void HorizontalPush()
-    {
-        ///SORT THIS SCRIPT TO ALLOW CHAINED PUSH
+    { 
+        //Check If we are colliding with movable object.
+        if (Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), pushRaycastCircleSize, thingICanMove))
+        {
 
+            //Stores the first collision object an a GameObject variable.
+            GameObject objToAdd = Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), pushRaycastCircleSize, thingICanMove).gameObject;
+            
 
+            //Adds every collision Gameobject to the List
+            for (int i = 0; i <= numbertOfPushableObjects; i++)
+            {                
+                objectsToPushList.Add(objToAdd); 
+                
+                if (Physics2D.OverlapCircle(objToAdd.transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), pushRaycastCircleSize, thingICanMove))
+                {
+                    objToAdd = Physics2D.OverlapCircle(objToAdd.transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), pushRaycastCircleSize, thingICanMove).gameObject;
+                }
+                else
+                {
+                    i = numbertOfPushableObjects;
+                }
+            }
 
-        //Will push if the next moving place contains a gameObject wirh a thingsICanMove layerMask.
-        if (Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove))
-        {       
-            chainedObjects[0] = Physics2D.OverlapCircle(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove).gameObject;
-            int arrayPos = 0;
-            while (Physics2D.OverlapCircle(chainedObjects[arrayPos].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove))
+            //If the object/objects we are moving do not encounter an unmovable space move them
+            if (!Physics2D.OverlapCircle(pushTarget.transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), stopRaycastCircleSize, whatStopsMovement))
             {
-                chainedObjects[arrayPos] = Physics2D.OverlapCircle(chainedObjects[arrayPos].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), raycastCircleSize, thingICanMove).gameObject;
-                chainedObjects[arrayPos].transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-            } 
+                //Moves the objects in the List.
+                for (int i = 0; i < objectsToPushList.Count; i++)
+                {
+
+                    pushTarget.transform.position = objectsToPushList[i].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                    objectsToPushList[i].layer = 9;
+                    objectsToPushList[i].transform.position = pushTarget.transform.position;
+
+                }
+            }
+            //The object itself should become unmovable if the next place is not pushable
+            else if(Physics2D.OverlapCircle(pushTarget.transform.position + new Vector3(Input.GetAxisRaw("Horizontal") , 0f, 0f), stopRaycastCircleSize, whatStopsMovement))
+            {
+                for (int i = 0; i < objectsToPushList.Count; i++)
+                {
+                    objectsToPushList[i].layer = 8;
+                    pushTarget.transform.position = objectsToPushList[i].transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                    
+
+                }
+            }
+            
         }
+        //Clears the List if not colliding with a Pushable objects anymore
+        objectsToPushList.Clear();
     }
 }
