@@ -910,7 +910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304824934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.61, y: -1.26, z: 22.376516}
+  m_LocalPosition: {x: -7.61, y: -1.26, z: 22.376516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 999620326}
@@ -1751,7 +1751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530495703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.61, y: -1.2739999, z: 22.376516}
+  m_LocalPosition: {x: -6.61, y: -1.2739999, z: 22.376516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1589276900}
@@ -1784,7 +1784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545764705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4457928, y: 1.9113282, z: 0}
+  m_LocalPosition: {x: -3.3609514, y: 1.9113282, z: 0}
   m_LocalScale: {x: 0.95757926, y: 0.95757926, z: 0.95757926}
   m_Children: []
   m_Father: {fileID: 459773567}
@@ -3073,7 +3073,7 @@ MonoBehaviour:
   thingICanMove:
     serializedVersion: 2
     m_Bits: 512
-  stopRaycastCircleSize: 0.2
+  stopRaycastCircleSize: 0.4
   pushRaycastCircleSize: 0.2
   pushTarget: {fileID: 580023439}
   objectsToPushList:
@@ -3812,7 +3812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422635530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.321793, y: 1.9113282, z: 0}
+  m_LocalPosition: {x: -6.236952, y: 1.9113282, z: 0}
   m_LocalScale: {x: 0.95757926, y: 0.95757926, z: 0.95757926}
   m_Children: []
   m_Father: {fileID: 459773567}
